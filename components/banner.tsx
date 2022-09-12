@@ -1,12 +1,13 @@
 import { NextComponentType } from "next";
+
 import styles from "./banner.module.css"
 
-interface Props {
+interface ButtonProps {
   buttonText: string,
   handleOnClick: () => void,
 }
 
-const Banner: NextComponentType<Props> = (props) => {
+const Banner: NextComponentType<ButtonProps> = (props) => {
 
   const { buttonText, handleOnClick } = props;
 
