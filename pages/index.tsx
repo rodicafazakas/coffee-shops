@@ -6,7 +6,16 @@ import styles from '../styles/Home.module.css'
 import Banner from "../components/banner";
 import Card from "../components/card";
 
-const Home: NextPage = () => {
+import coffeeStores from "../data/coffee-stores.json";
+
+export async function getStaticProps() {
+  return {
+    props: {coffeeStores}
+  }
+}
+
+const Home: NextPage = (props) => {
+  console.log("props", props);
 
   const handleOnBannerBtnClick =() => {
     console.log("hi banner button");
@@ -31,18 +40,17 @@ const Home: NextPage = () => {
         </div>
         
         <div className="cardLayout">
-          <Card 
-            name="Starbucks"
-            imgUrl="/static/hero-image.png" 
-            href="/coffee-store/starbucks" 
-            className={styles.card}
-          />
-          <Card 
-            name="Starbucks"
-            imgUrl="/static/hero-image.png" 
-            href="/coffee-store/starbucks" 
-            className={styles.card}
-          />
+          {coffeeStores.map( (coffeeStore) => {
+            return (
+              <Card 
+                key={coffeeStore.id}
+                name={coffeeStore.name}
+                imgUrl={coffeeStore.imgUrl} 
+                href={`/coffee-store/${coffeeStore.id}`} 
+                className={styles.card}
+              />
+            )}
+          )}
         </div>
 
       </main>
